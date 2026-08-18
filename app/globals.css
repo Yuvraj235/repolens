@@ -1,1 +1,102 @@
 @import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0d13;
+  --color-panel: #11151d;
+  --color-panel2: #161c27;
+  --color-border: #222a38;
+  --color-borderlt: #2c3547;
+  --color-fg: #dce1ea;
+  --color-muted: #8a93a6;
+  --color-faint: #5b6577;
+  --color-accent: #818cf8;
+  --color-accent2: #a78bfa;
+  --color-save: #34d399;
+  --color-warn: #fbbf24;
+  --color-danger: #f87171;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle ambient gradient so the dark UI isn't flat. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60rem 40rem at 12% -8%, rgba(129, 140, 248, 0.10), transparent 60%),
+    radial-gradient(50rem 35rem at 100% 0%, rgba(52, 211, 153, 0.07), transparent 55%);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-borderlt) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-borderlt);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #3a465b;
+  background-clip: padding-box;
+}
+
+@keyframes rl-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.rl-caret::after {
+  content: "▌";
+  margin-left: 1px;
+  animation: rl-pulse 1s steps(2) infinite;
+  color: var(--color-accent);
+}
+
+/* Markdown-ish rendering for streamed answers */
+.prose-rl { line-height: 1.65; }
+.prose-rl p { margin: 0.5rem 0; }
+.prose-rl ul { margin: 0.5rem 0; padding-left: 1.1rem; list-style: disc; }
+.prose-rl ol { margin: 0.5rem 0; padding-left: 1.2rem; list-style: decimal; }
+.prose-rl li { margin: 0.2rem 0; }
+.prose-rl h1, .prose-rl h2, .prose-rl h3 { font-weight: 650; margin: 0.8rem 0 0.4rem; }
+.prose-rl code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  background: var(--color-panel2);
+  border: 1px solid var(--color-border);
+  padding: 0.05rem 0.3rem;
+  border-radius: 0.3rem;
+}
+.prose-rl pre {
+  background: #0c1017;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  overflow-x: auto;
+  margin: 0.6rem 0;
+}
+.prose-rl pre code { background: none; border: none; padding: 0; }
+.prose-rl strong { color: #fff; font-weight: 620; }
+.prose-rl a { color: var(--color-accent); text-decoration: underline; }

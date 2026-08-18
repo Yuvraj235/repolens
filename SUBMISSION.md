@@ -45,6 +45,22 @@ whole point, so I put it front and center.
 **Stack:** Next.js (App Router) + TypeScript + Tailwind, deployed on Vercel. Answers come from
 **Grok (xAI)** through its OpenAI-compatible endpoint.
 
+```mermaid
+flowchart LR
+  U["Browser UI"] -->|"repo URL"| ING["/api/ingest (Node)"]
+  ING -->|"tarball"| GH[("GitHub codeload")]
+  ING -->|"filtered source files"| U
+  U --> ENG[["Context engine — runs in the browser"]]
+  ENG -->|"compressed context + question"| ASK["/api/ask"]
+  ASK -->|"stream"| GROK[("Grok / xAI")]
+  GROK -->|"answer + file:line citations"| U
+  ASK -. "no key" .-> DEMO["templated demo answer"]
+  DEMO --> U
+```
+
+The two API routes are stateless and thin. The heavy lifting — indexing, retrieval, compression —
+happens client-side, so there's no server session or vector store to manage.
+
 **The context engine (`lib/context-engine/`)** is the core IP and is deliberately simple:
 
 - **Filter** → drop binaries, lockfiles, `node_modules`, minified bundles, oversized files.
@@ -56,6 +72,16 @@ whole point, so I put it front and center.
 - **Budget + compress** → greedily pack the best chunks under a token budget; condense the rest to
   skeletons so the model still knows they exist.
 - **Explain** → every selection comes out with a score and a human-readable reason.
+
+```mermaid
+flowchart LR
+  F["Filter<br/>binaries · lockfiles<br/>vendored · minified"] --> C["Chunk<br/>at symbol boundaries"]
+  C --> R["Rank<br/>BM25 + symbol/path boosts"]
+  R --> X["Expand<br/>1-hop reference graph"]
+  X --> B["Budget<br/>greedy pack under token budget"]
+  B --> K["Compress<br/>skeletonize the overflow"]
+  K --> E["Explain<br/>score + reason per chunk"]
+```
 
 I'll call out the decisions that actually mattered, because the "how you decide" part is what you
 said you care about:

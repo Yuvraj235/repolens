@@ -40,6 +40,12 @@ and closer to how you'd actually reason about "what does this question need to s
   doesn't fit in full is condensed to its **signature** ("skeleton") so the model still knows it
   exists.
 
+```mermaid
+flowchart LR
+  F["Filter"] --> C["Chunk<br/>at symbols"] --> R["Rank<br/>BM25 + boosts"]
+  R --> X["Expand<br/>reference graph"] --> B["Budget"] --> K["Compress<br/>skeletons"] --> E["Explain"]
+```
+
 See `lib/context-engine/` for the whole thing; `selectContext()` in
 [`lib/context-engine/index.ts`](lib/context-engine/index.ts) is the entry point.
 

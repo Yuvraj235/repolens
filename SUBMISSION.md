@@ -110,8 +110,8 @@ live link had to *demonstrate value on the first click*.
 
 **Token counts are honest estimates.** xAI doesn't publish Grok's tokenizer, so I use
 `gpt-tokenizer` as a consistent proxy and label it as an estimate. Both sides of the savings ratio
-are measured the same way, so the comparison is fair even if the absolute number is approximate. I
-'d rather show an honest estimate than a fake-precise one.
+are measured the same way, so the comparison is fair even if the absolute number is approximate. I'd
+rather show an honest estimate than a fake-precise one.
 
 ## 4. Decision-making log (things I changed my mind on)
 

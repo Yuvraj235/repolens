@@ -8,7 +8,7 @@ tokens it saved.
 It's a working, miniature version of the idea behind an AI-coding context engine: keep full
 awareness of the repo, but only pay for the tokens that actually matter.
 
-- **Live demo:** _see the submission document / repo description for the deployed link_
+- **Live demo:** https://repolens-lime-zeta.vercel.app
 - **Stack:** Next.js (App Router) · TypeScript · Tailwind v4 · Grok (xAI) for answers
 
 ---

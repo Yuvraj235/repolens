@@ -1,7 +1,7 @@
 # RepoLens — Founding AI Engineer Assignment
 
 **Repo:** https://github.com/Yuvraj235/repolens
-**Live demo:** _deploying on Vercel — link goes here once imported (see README → Deploy on Vercel)_
+**Live demo:** https://repolens-lime-zeta.vercel.app
 
 > The live demo works with no setup — click "Try the bundled demo repo", or paste any public
 > GitHub repo. If a Grok key is configured on the deployment you get real AI answers; otherwise it
